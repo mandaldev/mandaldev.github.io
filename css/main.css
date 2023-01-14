@@ -1,0 +1,121 @@
+html {
+    background-color: #eee;
+    font-size: 12pt;
+    font-weight: 400;
+}
+
+body {
+    background-color: #fff;
+    margin: 2rem auto;
+    padding: 1rem 3rem 3rem 3rem;
+    max-width: 50rem;
+    font-family: "dejavu sans", Helvetica, "Segoe UI", Arial, sans-serif;
+    line-height: 2rem;
+    text-align: justify;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px dashed gray;
+}
+
+a:hover {
+    border-bottom: 2px dotted gray;
+}
+
+#topbar {
+    border-bottom: 1px solid #bbb;
+}
+
+nav {
+    padding: 1rem 0;
+    display: flex;
+}
+
+#nav-left {
+    text-align: left;
+    flex: 1;
+}
+
+#nav-right {
+    text-align: right;
+}
+
+nav a {
+    word-break: keep-all;
+    text-decoration: none;
+    border-bottom: 1px solid gray;
+    border-radius: 1rem;
+    background-color: #f3f3f3;
+    padding: 0.2rem 1.5rem;
+}
+
+nav #nav-left a {
+    margin: 0 1rem 0 0;
+}
+
+nav #nav-right a {
+    margin: 0 0 0 1rem;
+}
+
+header img {
+    width: 2rem;
+}
+
+footer {
+    margin-top: 2rem;
+    border-top: 1px solid #bbb;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #333;
+}
+
+code {
+    font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Courier New', 'Courier', 'Consolas', 'Source Han Sans SC', monospace;
+    border-radius: 0.25rem;
+    padding: 0 0.2rem;
+    background-color: #eee;
+    color: green;
+}
+
+pre {
+    line-height: 1.5rem;
+    padding-left: 1rem;
+    border-radius: 0.25rem;
+    background-color: #eee;
+    overflow-x: auto;
+}
+
+pre code {
+    color: inherit;
+    padding: 0;
+}
+
+h1 {
+    margin: 3rem 0;
+    border-bottom: 1px dashed #bbb;
+    padding-bottom: 1rem;
+}
+
+h1,
+h2,
+h3,
+strong {
+    font-weight: bolder;
+}
+
+em {
+    border-bottom: 2px dotted gray;
+    font-style: normal;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    border: 1px solid #ccc;
+}
