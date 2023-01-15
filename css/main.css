@@ -9,7 +9,7 @@ body {
     margin: 2rem auto;
     padding: 1rem 3rem 3rem 3rem;
     max-width: 50rem;
-    font-family: "dejavu sans", Helvetica, "Segoe UI", Arial, sans-serif;
+    font-family: "Segoe UI", "Dejavu Sans", Helvetica, Arial, sans-serif;
     line-height: 2rem;
     text-align: justify;
 }
