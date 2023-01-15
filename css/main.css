@@ -73,16 +73,16 @@ footer {
 
 code {
     font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Courier New', 'Courier', 'Consolas', 'Source Han Sans SC', monospace;
-    border-radius: 0.25rem;
-    padding: 0 0.2rem;
-    background-color: #eee;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 0 0.5rem;
     color: green;
 }
 
 pre {
     line-height: 1.5rem;
-    padding-left: 1rem;
-    border-radius: 0.25rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
     background-color: #eee;
     overflow-x: auto;
 }
@@ -90,6 +90,7 @@ pre {
 pre code {
     color: inherit;
     padding: 0;
+    border: inherit;
 }
 
 h1 {
@@ -115,7 +116,11 @@ table {
     width: 100%;
 }
 
-th,
-td {
+thead, tr:hover {
+    background-color: #f3f3f3;
+}
+
+th, td {
     border: 1px solid #ccc;
+    padding: 0 1rem;
 }
