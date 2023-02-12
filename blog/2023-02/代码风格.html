@@ -1,0 +1,98 @@
+<!doctype html><html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>代码风格 | 2023-02 | Blog | Mandal</title>
+<link rel="shortcut icon" href="/image/avator.png">
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/hl.css">
+</head>
+<body>
+<div id='topbar'>
+
+<nav>
+    <div id="nav-left">
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+        <a href="/project">Project</a>
+    </div>
+    <div id="nav-right">
+        <a href="/about.html">About</a>
+    </div>
+</nav>
+
+</div>
+<h1 id="代码风格">代码风格</h1>
+<p>谈谈如何选择合适的代码风格。</p>
+<h2 id="代码的可维护性是最重要的">代码的可维护性是最重要的</h2>
+<p>一代又一代的软件开发工程师们，在踩过无数坑后，发现软件开发和其他任何产品的都不一样。一个软件的开发始终不会停止，除非被放弃。这意味着，软件的代码会被不断的修改，直到这个软件不再被用户使用，走到了生命的尽头。</p>
+<p>“永恒”虽然不可能，但还是有无数人在追求，软件工程师也是其中之一。</p>
+<p>代码需要不断的被修改，而如何提高修改效率始终是软件工程师最头疼的问题之一。而优秀的编码风格就是能够提高代码可维护性的一种方法。</p>
+<p>下面列出了一些比较糟糕的代码风格，某些甚至可以说是极端，在修改代码时如果遇到这些代码，估计谁都会忍不住曝粗口。</p>
+<ul>
+<li>变量名太短，完全 get 不到意义。</li>
+<li>明明是 C++，还是用了太多宏，好像还是 C 语言。</li>
+<li>函数实现非常长，是千行千行的那种。如果你定位到了这个函数内有个关键
+bug……</li>
+<li>函数参数个数太多，十几个，二十几个。现在有个选择摆在你面前，加参数还是……</li>
+<li>缩进混乱不统一，导致看到的代码层级不清晰。</li>
+<li>缩进层级太多，天梯一样的代码。</li>
+</ul>
+<p>很多人都认为代码风格和个人喜好差不多，每个人都不一样,
+没有理由要求大家都一样。但其实“喜好”只是在某些具体细节方面，比如用 tab
+还是空格。</p>
+<p>我认为设计代码风格最重要的原则就是提高代码的可维护性，而“喜好”其实只是习惯不习惯而已。</p>
+<h2 id="漂亮是最次要的">漂亮是最次要的</h2>
+<p>审美是主观因素，不要追求代码的“漂亮”。这里很多人有个误区：漂亮意味着可读性强。代码是给未来的自己和别人读、改的，不要强加主观“偏见”。</p>
+<p>比如，有些人喜欢对代码进行格式对齐，这种常见于结构体，类，枚举里面数据的定义：将所有的类型，名字，或初始值进行对齐。最终像一个表格一样。格式化后，看着如此工整的代码，心里洋洋自得，实不知是在给未来挖坑。</p>
+<p>考虑下面的一个示例：</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 注意结构体里的成员变量名字都进行了对齐：使用了一个制表符</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> A</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span>     i1<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span>    b1<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">float</span>   f1<span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>后来，需要增加一个数据，但是发现类型名称有点长：</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> A</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span>     i1<span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span>    b1<span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">float</span>   f1<span class="op">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>shared_ptr<span class="op">&lt;</span>A<span class="op">&gt;</span> next<span class="op">;</span> <span class="co">// 很别扭对不对</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>既然要对齐，自然“一条道走到黑”：</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> A</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span>                             i1<span class="op">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span>                            b1<span class="op">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">float</span>                           f1<span class="op">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>shared_ptr<span class="op">&lt;</span>A<span class="op">&gt;</span>                   next<span class="op">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>这次，留了个心眼：留够间距。</p>
+<p>你可能会觉得没什么问题，但真的吗？</p>
+<ul>
+<li>如果之前 <code>A</code> 里面已经有 20
+个成员了，你得打多少空格！不过你觉得没什么，因为编辑器有插件，可以自动对齐代码。不管有多方便，敲多敲少键盘都不是问题的关键：给代码的维护引入了额外负担。</li>
+<li>如果是别人改这段代码，他会做对齐吗？你有信心他会这么做吗？</li>
+</ul>
+<p>其实对齐是没有必要的，名字和类型之间间隔一个空格才最统一，没有任何负担，而且代码也更紧凑：</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode cpp"><code class="sourceCode cpp"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> A</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> i1<span class="op">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> b1<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">float</span> f1<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>shared_ptr<span class="op">&lt;</span>A<span class="op">&gt;</span> next<span class="op">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<h2 id="设计">设计</h2>
+<p>下一篇：<a href="代码风格设计.html">代码风格设计</a></p>
+
+<footer>
+    © 2020 - 2023 Mandal Dev - All Rights Reserved
+</footer>
+
+</body></html>
