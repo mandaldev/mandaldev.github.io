@@ -124,7 +124,7 @@ code {
 
 pre {
     line-height: 1.2rem;
-    padding: 0.5rem;
+    padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     background-color: #eee;
     overflow-x: auto;
