@@ -1,6 +1,5 @@
 html {
     background-color: #eee;
-    font-size: 16px;
 }
 
 body {
@@ -11,6 +10,10 @@ body {
 
 /* width >= 800px */
 @media screen and (min-width: 800px) {
+    html {
+        font-size: 16px;
+    }
+
     body {
         text-align: justify;
         margin: 1rem auto;
@@ -21,6 +24,10 @@ body {
 
 /* width <= 800px */
 @media screen and (max-width: 800px) {
+    html {
+        font-size: 16px;
+    }
+
     body {
         margin: 1rem auto;
         padding: 1rem 2rem;
@@ -30,9 +37,13 @@ body {
 
 /* width <= 400px */
 @media screen and (max-width: 400px) {
+    html {
+        font-size: 15px;
+    }
+
     body {
         margin: 0 auto;
-        padding: 1rem 2rem;
+        padding: 1rem 1rem;
         max-width: 20rem;
     }
 }
@@ -102,22 +113,29 @@ footer {
 }
 
 code {
-    font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Courier New', 'Courier', 'Consolas', 'Source Han Sans SC', monospace;
     color: green;
+    font-family: 'Source Code Pro', 'DejaVu Sans Mono', 'Courier New', 'Courier', 'Consolas', 'Source Han Sans SC', monospace;
+    font-size: 1rem;
+    white-space: nowrap;
+    padding: 0 4px;
+    border-radius: 4px;
+    background-color: #eee;
 }
 
 pre {
-    line-height: 1.5rem;
-    padding: 1rem;
+    line-height: 1.2rem;
+    padding: 0.5rem;
     border-radius: 0.5rem;
     background-color: #eee;
     overflow-x: auto;
 }
 
 pre code {
+    font-size: 0.9rem;
     color: inherit;
     padding: 0;
     border: inherit;
+    white-space: pre-wrap;
 }
 
 h1 {
