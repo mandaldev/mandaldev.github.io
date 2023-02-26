@@ -124,10 +124,25 @@
 <li><p>换行的时机</p></li>
 </ol>
 <table>
+<colgroup>
+<col style="width: 49%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">case</th>
+<th style="text-align: left;">new line</th>
+</tr>
+</thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">case</td>
-<td style="text-align: left;">new line</td>
+<td style="text-align: left;"><code>{</code> 后</td>
+<td style="text-align: left;">yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">长函数签名</td>
+<td style="text-align: left;">yes，<code>(</code>后，<code>)</code>
+前，每个参数单独成行，包括第一个</td>
 </tr>
 </tbody>
 </table>
