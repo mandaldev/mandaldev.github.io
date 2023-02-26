@@ -1,32 +1,44 @@
 html {
     background-color: #eee;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 body {
     background-color: #fff;
-    margin: 1rem 0.5rem;
-    padding: 1rem 1.5rem;
-    /* max-width: 20rem; */
     font-family: sans-serif;
     line-height: 2rem;
 }
 
-/* pc */
-@media screen and (max-resolution: 180dpi) {
-    html {
-        font-size: 16px;
-    }
-
+/* width >= 800px */
+@media screen and (min-width: 800px) {
     body {
+        text-align: justify;
         margin: 1rem auto;
         padding: 1rem 3rem;
         max-width: 42rem;
-        text-align: justify;
     }
 }
 
-ul, ol {
+/* width <= 800px */
+@media screen and (max-width: 800px) {
+    body {
+        margin: 1rem auto;
+        padding: 1rem 2rem;
+        max-width: 40rem;
+    }
+}
+
+/* width <= 400px */
+@media screen and (max-width: 400px) {
+    body {
+        margin: 0 auto;
+        padding: 1rem 2rem;
+        max-width: 20rem;
+    }
+}
+
+ul,
+ol {
     padding-left: 1.5rem;
 }
 
@@ -131,11 +143,13 @@ table {
     width: 100%;
 }
 
-thead, tr:hover {
+thead,
+tr:hover {
     background-color: #f3f3f3;
 }
 
-th, td {
+th,
+td {
     border: 1px solid #ccc;
     padding: 0 1rem;
 }
