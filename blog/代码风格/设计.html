@@ -91,63 +91,83 @@
 <div class="sourceCode" id="cb6"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// do</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> A</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">/// one</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">/// one</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> a<span class="op">;</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">/// another one</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> b<span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        <span class="co">/// another one</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> b<span class="op">;</span></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">// or</span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> A</span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a<span class="op">;</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> b<span class="op">;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> a<span class="op">;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> b<span class="op">;</span></span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
 <p>函数实现内不同业务逻辑之间：</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">// do</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> fun<span class="op">()</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span> <span class="co">// do something with a</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>        <span class="op">...</span> <span class="co">// do something with a</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span> <span class="co">// check results</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>        <span class="op">...</span> <span class="co">// check results</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">// do not</span></span>
 <span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> fun<span class="op">()</span></span>
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span> <span class="co">// do something with a</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span> <span class="co">// check results</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> a <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>        <span class="op">...</span> <span class="co">// do something with a</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>        <span class="op">...</span> <span class="co">// check results</span></span>
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
 <ol start="3" type="1">
 <li><p>不要使用连续的空格和空行, 除非用于缩进</p></li>
-<li><p>换行的时机</p></li>
+<li><p>不要编写非常长的代码行，在适当的时机 wrap line</p></li>
 </ol>
-<table>
-<colgroup>
-<col style="width: 49%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">case</th>
-<th style="text-align: left;">new line</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>{</code> 后</td>
-<td style="text-align: left;">yes</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">长函数签名</td>
-<td style="text-align: left;">yes，<code>(</code>后，<code>)</code>
-前，每个参数单独成行，包括第一个</td>
-</tr>
-</tbody>
-</table>
+<p>一般出现长行的情形：</p>
+<ul>
+<li>函数头</li>
+</ul>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode c++"><code class="sourceCode cpp"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. 参数太多</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> many_params_fn<span class="op">(</span><span class="dt">int</span> argument1<span class="op">,</span> <span class="dt">bool</span> boolean_arg<span class="op">,</span> <span class="dt">float</span> float_argument<span class="op">,</span> <span class="bu">std::</span>string<span class="op"> </span><span class="at">const</span> <span class="op">&amp;</span>str_arg<span class="op">,</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> <span class="at">const</span> <span class="op">&amp;</span>str_arguments<span class="op">);</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">// 这种最好将每个参数单独置于一行</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> many_params_fn<span class="op">(</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> argument1<span class="op">,</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> boolean_arg<span class="op">,</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">float</span> float_argument<span class="op">,</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>string<span class="op"> </span><span class="at">const</span> <span class="op">&amp;</span>str_arg<span class="op">,</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>        <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;</span> <span class="at">const</span> <span class="op">&amp;</span>str_arguments</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. 返回类型（比如模板类型）</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="bu">std::</span>map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>pair<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>set<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;&gt;&gt;&gt;</span> <span class="at">const</span> <span class="op">&amp;</span>long_return_type_fn<span class="op">(</span><span class="dt">int</span> arg<span class="op">);</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">// 像这种实际是种糟糕的写法：</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">// - 优化接口设计，是否真的要返回这么复杂的类型</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">// - 尝试作为引用参数的方式</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">// - 可以考虑使用模板别名</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">// - 或者把返回类型单独成行</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">// 后两种实际没有解决长类型的问题</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> ReturnType <span class="op">=</span> <span class="bu">std::</span>map<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>vector<span class="op">&lt;</span><span class="bu">std::</span>pair<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">,</span> <span class="bu">std::</span>set<span class="op">&lt;</span><span class="bu">std::</span>string<span class="op">&gt;&gt;&gt;&gt;;</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>ReturnType <span class="at">const</span> <span class="op">&amp;</span>long_return_type_fn<span class="op">(</span><span class="dt">int</span> arg<span class="op">);</span></span></code></pre></div>
+<ul>
+<li>复杂表达式</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode c++"><code class="sourceCode cpp"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">// 1. 算数表达式</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> b <span class="op">=</span> long_expr_abc <span class="op">*</span> long_expr_abc <span class="op">+</span> length_of_string <span class="op">*</span> <span class="dv">4</span> <span class="op">+</span> bd <span class="op">/</span> bc <span class="op">-</span> digit <span class="op">*</span> <span class="op">(</span>long_expr_int <span class="op">%</span> <span class="dv">2</span><span class="op">)</span> <span class="op">-</span> <span class="dv">12</span><span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">// 一般优先在低优先级的运算符前进行 wrap</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> b <span class="op">=</span> long_expr_abc <span class="op">*</span> long_expr_abc</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>        <span class="op">+</span> length_of_string <span class="op">*</span> <span class="dv">4</span> <span class="op">+</span> bd <span class="op">/</span> bc</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>        <span class="op">-</span> digit <span class="op">*</span> <span class="op">(</span>long_expr_int <span class="op">%</span> <span class="dv">2</span><span class="op">)</span> <span class="op">-</span> <span class="dv">12</span><span class="op">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">// 2. 函数调用</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="kw">auto</span> result <span class="op">=</span> call_lot_of_args<span class="op">(</span>count<span class="op">,</span> names<span class="op">,</span> goods<span class="op">,</span> filters_of_bad<span class="op">,</span> filters_of_very_bad<span class="op">,</span> <span class="op">[](</span><span class="dt">int</span> i<span class="op">)</span> <span class="op">{</span><span class="cf">return</span> i <span class="op">*</span> i<span class="op">;</span> <span class="op">});</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">// - 优化接口，太多的参数是个糟糕设计，要么是函数实现太复杂，要么是状态太多，</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">//   是不是应该实现为类，或用结构体代替</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">// - 很显然，参数前应该 wrap，可以每个参数单独成行，或长度适当的地方</span></span></code></pre></div>
 <h2 id="缩进">缩进</h2>
 <ol type="1">
 <li>使用 Tab 进行缩进，8 个字符宽。</li>
@@ -168,7 +188,7 @@
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">case</th>
+<th style="text-align: left;">时机</th>
 <th style="text-align: left;">indent + 1</th>
 </tr>
 </thead>
@@ -205,7 +225,46 @@
 </tbody>
 </table>
 <h2 id="注释">注释</h2>
+<p>尽量避免使用块注释（避免嵌套问题）。使用行注释进行文档的编写。为了区分一般注释和文档，建议文档注释使用三个斜杆
+<code>///</code> 开始行注释。</p>
+<p>不要使用行尾注释，因为你没法保证注释够短，多行的行尾注释编辑起来非常麻烦。</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode c++"><code class="sourceCode cpp"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">/// A segment class</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Segment</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span><span class="op">:</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="co">/// get length of this segment</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> length<span class="op">();</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span><span class="op">:</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">// first endpoint</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        Point p1<span class="op">;</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// second endpoint</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        Point p2<span class="op">;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="op">};</span></span></code></pre></div>
+<h3 id="文档注释">文档注释</h3>
+<p>尽量把文档写在代码里，这样文档才是‘活的’。</p>
+<p>只应该给对外接口编写文档，包括针对某个接口的，以及一般的概述、介绍等之类的。</p>
+<p>文档注释一般都在其接口的前面开始，之间没有空行。文档应该具有针对性：类的文档应该只描述这个类，不包括公开的接口等。</p>
+<p>针对函数和方法，建议单独为参数编写文档，即参数单独成行，行前编写参数的文档：</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode c++"><code class="sourceCode cpp"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">/// do something with string.</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co">/// return true if succeed.</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="dt">bool</span> public_fun<span class="op">(</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>        <span class="co">/// the string to examing</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>        <span class="dt">char</span> <span class="at">const</span> <span class="op">*</span>str<span class="op">,</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">/// count of chars of `str`</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> count</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span></code></pre></div>
+<p>文档的编写尽量统一格式，比如可以用 markdown 等。</p>
 <h2 id="代码规模">代码规模</h2>
+<h2 id="函数和方法">函数和方法</h2>
+<p>一个函数和方法的实现不要太长，除非内部是比较简单的结构，比如非常多
+case 的
+switch。努力控制函数的实现在半页（屏）内（这种说法比较笼统，但具体的行数比较难把握具体多少，所以还是看自己平时的编辑器有多高吧），多了就要重构。</p>
+<h2 id="源文件">源文件</h2>
+<p>努力控制一个源文件代码行规模，举个极端的例子：GNU
+建议每个函数的实现放在单独的源文件里。是的，很少有人（项目、团队）会采取这种方式。但努力做到这点的
+coders 往往享受着庞大项目却能快速编译的好处。</p>
 <h2 id="命名">命名</h2>
 <h2 id="花括号">花括号</h2>
 <h2 id="限定符">限定符</h2>
