@@ -1,0 +1,215 @@
+<!doctype html><html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>傅立叶变换 · 傅立叶变换 · Blog · Mandal</title>
+<link rel="shortcut icon" href="/image/avator.png">
+<link rel="stylesheet" type="text/css" href="/css/hl.css">
+<link rel="stylesheet" type="text/css" href="/css/main.css">
+<script src="/js/defer.js" defer></script>
+</head>
+<body>
+<div id='topbar'>
+
+<nav>
+    <div id="nav-left">
+        <a href="/">Home</a>
+        <a href="/blog">Blog</a>
+        <a href="/project">Project</a>
+    </div>
+    <div id="nav-right">
+        <a href="/about.html">About</a>
+    </div>
+</nav>
+
+</div>
+<h1 id="傅立叶变换">傅立叶变换</h1>
+<p>傅立叶变换（FT）的标准形式是积分，不过实际应用中，数据都是离散的，所以这里只研究他的离散形式：</p>
+<p><img src="/image/math/series/fft_dft.svg"
+title="X_k = \sum_{n=0}^{N-1} x_n\cdot e^{-i2\pi kn/N }"
+class="math" /></p>
+<p><img src="/image/math/series/fft_dft-r.svg"
+title="x_n = \frac{1}{N} \sum_{k=0}^{N-1} X_k\cdot e^{i2\pi kn/N}"
+class="math" /></p>
+<p>离散傅立叶变换（DFT）的第一个公式的输入是时间维度的量，第二个是第一个的逆变换。</p>
+<p>数学公式总是令人苦恼，更别说如此复杂的。</p>
+<p>不过不要紧，理解傅立叶变换并不意味着一定要理解他的公式，从实际的事例去理解他反而更加直观。所以我们直接用他去处理数据，获取输出，通过各种直观的数据可视化方式去理解傅立叶变换到底干了什么。</p>
+<h2 id="实现">实现</h2>
+<p>开源库 <a href="http://www.fftw.org">FFTW3</a>
+提供了快速成熟的傅立叶变换实现，后面我会直接用它来进行各种实验。</p>
+<p>下面是 FFTW3
+官方文档的一个<strong>一维</strong>傅立叶变换的示例代码：</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;fftw3.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="op">...</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    fftw_complex <span class="op">*</span>in<span class="op">,</span> <span class="op">*</span>out<span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    fftw_plan p<span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    in <span class="op">=</span> <span class="op">(</span>fftw_complex<span class="op">*)</span> fftw_malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>fftw_complex<span class="op">)</span> <span class="op">*</span> N<span class="op">);</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    out <span class="op">=</span> <span class="op">(</span>fftw_complex<span class="op">*)</span> fftw_malloc<span class="op">(</span><span class="kw">sizeof</span><span class="op">(</span>fftw_complex<span class="op">)</span> <span class="op">*</span> N<span class="op">);</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> fftw_plan_dft_1d<span class="op">(</span>N<span class="op">,</span> in<span class="op">,</span> out<span class="op">,</span> FFTW_FORWARD<span class="op">,</span> FFTW_ESTIMATE<span class="op">);</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    fftw_execute<span class="op">(</span>p<span class="op">);</span> <span class="co">/* repeat as needed */</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">...</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    fftw_destroy_plan<span class="op">(</span>p<span class="op">);</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    fftw_free<span class="op">(</span>in<span class="op">);</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    fftw_free<span class="op">(</span>out<span class="op">);</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+<p>这个过程并不复杂：首先准备好输入输出缓冲区，再准备好输入数据，之后创建一个
+FFTW 的 <code>plan</code>，可以把这个 <code>plan</code>
+理解为上面的数学公式，<code>execute</code>
+就相当于是把数据带入这个公式进行实际的计算，最后输出缓冲区内就得到傅立叶变换的结果了。</p>
+<p>创建 <code>plan</code> 的时候第三个参数有点意思，有 FORWARD
+的话，是不是就有 BACKWARD
+的呢？确实如此。事实是，傅立叶变换是可逆的，大致观察一下最上面的公式就能发现他们两个非常相似。</p>
+<div class="note">
+<p>可以注意到，DFT
+的输入输出都是复数。回忆以前的数学知识，复数实际就是两个数组成的一种特殊数：一个是实数，一个是虚数。简单的，我们可以把他看成两个实数的组合，只是两个的意义不一样罢了。所以，后面会对这两个数单独进行观察、分析。</p>
+</div>
+<h2 id="输入数据">输入数据</h2>
+<p>接下来，得构造数据来进行实验。很简单，我们可以使用一个简单的单个参数的函数来填充傅立叶变换的输入的实数部分，因为实际中一般不会使用复数,
+现在我们也不关心他，所以输入数据的虚数部分都是 0。</p>
+<p>第一次使用的是一个正弦函数：</p>
+<p><img src="/image/math/series/fft_sin4t.svg"
+title="f(t)=sin(4t \times 2\pi)" class="math" /></p>
+<p>这个函数的输入是时间，我们以 1/100 秒的间隔，从 0.0
+秒开始，调用这个函数 100 次，得到 100 个数据。</p>
+<div class="note">
+<p>一般的，把调用函数的这个过程称为「采样」，函数的结果称为「样本」，采样间隔一定是固定的，所以，1
+秒内得到的样本数量称为「采样频率」。而调用的那个函数称之为「信号」。</p>
+</div>
+<p>然后把这些数据交给 FFTW，看看输出是个什么样子。</p>
+<p>这样还没完，既然傅立叶变换还有个逆，那不妨把输出‘逆’过去，看看是什么效果。</p>
+<h2 id="输出">输出</h2>
+<p>如果输出只是一堆数字，那就太无聊了，而且也看不出什么规律。所以可以借助可视化工具，把数据绘制成图表，就有趣多了。</p>
+<p>下面是输入数据的折线图：</p>
+<figure>
+<img src="/image/figure/series/fft_sin4t-in-r.svg"
+alt="一个常见的正弦曲线。可以看到，这个曲线在 1 秒的间隔内，重复了 4 次，也就是它的频率为 4Hz, 当然了，曲线的最高最低处分别为 1、-1，也就是振幅为 1。这和输入函数非常吻合" />
+<figcaption aria-hidden="true">一个常见的正弦曲线。可以看到，这个曲线在
+1 秒的间隔内，重复了 4 次，也就是它的频率为 4Hz,
+当然了，曲线的最高最低处分别为 1、-1，也就是振幅为
+1。这和输入函数非常吻合</figcaption>
+</figure>
+<p>输出，分别是实部和虚部：</p>
+<figure>
+<img src="/image/figure/series/fft_sin4t-out-r.svg" alt="几乎都是 0" />
+<figcaption aria-hidden="true">几乎都是 0</figcaption>
+</figure>
+<figure>
+<img src="/image/figure/series/fft_sin4t-out-i.svg"
+alt="大部分都是 0, 但是两个尖尖着实吸引眼球：(0.04, -50)，(0.96, 50)" />
+<figcaption aria-hidden="true">大部分都是 0,
+但是两个尖尖着实吸引眼球：<code>(0.04, -50)</code>，<code>(0.96, 50)</code></figcaption>
+</figure>
+<p>实数部分都非常接近 0,
+所以暂且可以忽略他。虚数部分整条折线几乎非常平坦，只有两个尖尖有点‘不合时宜’。
+而且这两个折线似乎是对称的，实数从中间开始左右对称，虚数也是从中间开始左右奇对称（一下一上）。不过右边差了一个数据，这可能是因为输入数据并没有在
+<code>t = 1.0</code> 的时候调用（100 个数据是从 0 开始的）。</p>
+<p>所以，就目前的情况看，DFT
+的输出只有左边半部分有实际参考意义，右边是重复多余的。</p>
+<p>最后是逆变换的结果：</p>
+<figure>
+<img src="/image/figure/series/fft_sin4t-back-r.svg"
+alt="居然和原始输入一模一样！" />
+<figcaption aria-hidden="true">居然和原始输入一模一样！</figcaption>
+</figure>
+<figure>
+<img src="/image/figure/series/fft_sin4t-back-i.svg"
+alt="也几乎都是 0" />
+<figcaption aria-hidden="true">也几乎都是 0</figcaption>
+</figure>
+<p>逆变换的结果居然和输入一模一样（误差非常小，可以忽略）。</p>
+<h2 id="对比">对比</h2>
+<p>但看一组数据很难看出什么名堂，所以接下来要修改一下那个输入函数，对比着看看输出是如何变化的。而且通过前面的第一次实验，输出的虚数部分是最吸引注意的，所以后面会专注于输出的虚数。</p>
+<h3 id="频率">频率</h3>
+<p>首先，单独修改输入函数的频率，然后单独修改振幅,
+对比修改之前的结果。</p>
+<p>频率设为 3：</p>
+<figure>
+<img src="/image/figure/series/fft_sin3t-out-i.svg"
+alt="基本未变化，只有尖尖的位置：(0.03, -50)" />
+<figcaption
+aria-hidden="true">基本未变化，只有尖尖的位置：<code>(0.03, -50)</code></figcaption>
+</figure>
+<p>频率设为 5：</p>
+<figure>
+<img src="/image/figure/series/fft_sin5t-out-i.svg"
+alt="基本也未变化，只有尖尖的位置：(0.05, -50)" />
+<figcaption
+aria-hidden="true">基本也未变化，只有尖尖的位置：<code>(0.05, -50)</code></figcaption>
+</figure>
+<p>现在可以确定，输入函数的频率是多少，尖尖就会出现在
+<code>频率/100</code> 这个位置。频率为 4，那就是 0.04
+秒。也就是说，从第一个位置开始，频率从 0 开始一一对应。如果频率是
+0，是一种什么情况呢？频率 0
+意味着输入函数输出的是一个常数，一个不会变化的数。</p>
+<p>再次修改输入函数，让他始终输出 1：</p>
+<figure>
+<img src="/image/figure/series/fft_1-out-i.svg" alt="虚数部分" />
+<figcaption aria-hidden="true">虚数部分</figcaption>
+</figure>
+<p>奇怪的是，第一个位置并没有出现尖尖。相反，这次实数部分出现了：</p>
+<figure>
+<img src="/image/figure/series/fft_1-out-r.svg" alt="实数部分" />
+<figcaption aria-hidden="true">实数部分</figcaption>
+</figure>
+<p>看来虚数部分不能反应出输入函数的常数特征，相反，实数部分能够得到反映。现在得补充一下之前的结论：频率为
+0 时，第一个位置的虚数不会有影响，相反第一个实数的值会有变化。</p>
+<h3 id="振幅">振幅</h3>
+<p>接下来，单独修改振幅对比结果。</p>
+<p>振幅设为 0.5：</p>
+<figure>
+<img src="/image/figure/series/fft_0.5sin4t-out-i.svg"
+alt="基本未变化，只有尖尖的高度：(0.04, -25)" />
+<figcaption
+aria-hidden="true">基本未变化，只有尖尖的高度：<code>(0.04, -25)</code></figcaption>
+</figure>
+<p>振幅设为 2：</p>
+<figure>
+<img src="/image/figure/series/fft_2sin4t-out-i.svg"
+alt="基本未变化，只有尖尖的高度：(0.04, -100)" />
+<figcaption
+aria-hidden="true">基本未变化，只有尖尖的高度：<code>(0.04, -100)</code></figcaption>
+</figure>
+<p>显然，振幅只影响尖尖的高度，位置没有影响。目前的实验来看，高度为振幅的
+50 倍，这个 50
+恰好是采样次数的一半。为了验证这一点，接下来再单独修改采样次数，也就是采样频率，对比结果。</p>
+<h3 id="采样频率">采样频率</h3>
+<p>还是使用最初的那个输入函数，不做如何修改。因为这次样本数量非常多，所以图表里只记录了前一部分。</p>
+<p>采样 200 次：</p>
+<figure>
+<img src="/image/figure/series/fft_200-sin4t-out-i.svg"
+alt="基本未变化，只有尖尖的高度：(0.04, -100)" />
+<figcaption
+aria-hidden="true">基本未变化，只有尖尖的高度：<code>(0.04, -100)</code></figcaption>
+</figure>
+<p>采样 400 次：</p>
+<figure>
+<img src="/image/figure/series/fft_400-sin4t-out-i.svg"
+alt="基本未变化，只有尖尖的高度：(0.04, -200)" />
+<figcaption
+aria-hidden="true">基本未变化，只有尖尖的高度：<code>(0.04, -200)</code></figcaption>
+</figure>
+<p>所以可以下结论：虚数部分的尖尖的高度就是对应频率的振幅。因为振幅没有负的，所以可以说虚数部分的绝对值即为振幅。</p>
+<h2 id="结论">结论</h2>
+<p>有了上面所有的实验结果，可以发现，DFT
+可以提取一个信号的频率、振幅信息，而且每个位置对应一个频率，绝对值对应该频率的正弦曲线的振幅。</p>
+<p>然而单纯就一个正弦曲线来说（正弦曲线在实际中的一个典型表现就是「波」），一般会用三个特性去描述他：频率、振幅和相位。</p>
+<div class="note">
+<p>还是拿最开始的那个输入函数来看，但 <code>t = 0</code> 时，弧度即为 0,
+那如果弧度不是 0 呢？简单的，可以给他加上一个常量：</p>
+<p><img src="/image/math/series/fft_phase-pi2.svg"
+title="f(t)=sin(4t \times 2\pi + pi/2)" class="math" /></p>
+<p>这样，时间为 0 时，弧度从
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>i</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">pi/2</annotation></semantics></math>
+开始。所以说，起始弧度就是「相位」。</p>
+</div>
+<p>现在我们知道 DFT
+给了我们一个正弦曲线的频率和振幅信息，那相位哪去了呢？</p>
+
+<footer>
+    © 2020 - 2023 Mandal Dev - All Rights Reserved
+</footer>
+
+</body></html>
