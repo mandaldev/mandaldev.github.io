@@ -163,7 +163,10 @@ em {
 
 table {
     border-collapse: collapse;
-    width: 100%;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow-x: scroll;
 }
 
 thead,
@@ -222,4 +225,9 @@ figcaption {
 
 .new-tab-sym-link {
     user-select: none;
+}
+
+.image-cell {
+    width: 8rem;
+    vertical-align: bottom;
 }
