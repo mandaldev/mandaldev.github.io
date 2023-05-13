@@ -25,10 +25,10 @@
 </div>
 <h1 id="傅立叶变换">傅立叶变换</h1>
 <p>傅立叶变换（FT）的标准形式是积分，不过实际应用中，数据都是离散的，所以这里只研究他的离散形式：</p>
-<p><img src="/image/math/series/fft_dft.svg"
+<p><img src="math.dft.svg"
 title="X_k = \sum_{n=0}^{N-1} x_n\cdot e^{-i2\pi kn/N }"
 class="math" /></p>
-<p><img src="/image/math/series/fft_dft-r.svg"
+<p><img src="math.dft_reverse.svg"
 title="x_n = \frac{1}{N} \sum_{k=0}^{N-1} X_k\cdot e^{i2\pi kn/N}"
 class="math" /></p>
 <p>离散傅立叶变换（DFT）的第一个公式的输入是时间维度的量，第二个是第一个的逆变换。</p>
@@ -70,8 +70,8 @@ FFTW 的 <code>plan</code>，可以把这个 <code>plan</code>
 <p>接下来，得构造数据来进行实验。很简单，我们可以使用一个简单的单个参数的函数来填充傅立叶变换的输入的实数部分，因为实际中一般不会使用复数,
 现在我们也不关心他，所以输入数据的虚数部分都是 0。</p>
 <p>第一次使用的是一个正弦函数：</p>
-<p><img src="/image/math/series/fft_sin4t.svg"
-title="f(t)=sin(4t \times 2\pi)" class="math" /></p>
+<p><img src="math.sin4t.svg" title="f(t)=sin(4t \times 2\pi)"
+class="math" /></p>
 <p>这个函数的输入是时间，我们以 1/100 秒的间隔，从 0.0
 秒开始，调用这个函数 100 次，得到 100 个数据。</p>
 <div class="note">
@@ -84,7 +84,7 @@ title="f(t)=sin(4t \times 2\pi)" class="math" /></p>
 <p>如果输出只是一堆数字，那就太无聊了，而且也看不出什么规律。所以可以借助可视化工具，把数据绘制成图表，就有趣多了。</p>
 <p>下面是输入数据的折线图：</p>
 <figure>
-<img src="/image/figure/series/fft_sin4t-in-r.svg"
+<img src="figure.sin4t_in_r.svg"
 alt="一个常见的正弦曲线。可以看到，这个曲线在 1 秒的间隔内，重复了 4 次，也就是它的频率为 4Hz, 当然了，曲线的最高最低处分别为 1、-1，也就是振幅为 1。这和输入函数非常吻合" />
 <figcaption aria-hidden="true">一个常见的正弦曲线。可以看到，这个曲线在
 1 秒的间隔内，重复了 4 次，也就是它的频率为 4Hz,
@@ -93,11 +93,11 @@ alt="一个常见的正弦曲线。可以看到，这个曲线在 1 秒的间隔
 </figure>
 <p>输出，分别是实部和虚部：</p>
 <figure>
-<img src="/image/figure/series/fft_sin4t-out-r.svg" alt="几乎都是 0" />
+<img src="figure.sin4t_out_r.svg" alt="几乎都是 0" />
 <figcaption aria-hidden="true">几乎都是 0</figcaption>
 </figure>
 <figure>
-<img src="/image/figure/series/fft_sin4t-out-i.svg"
+<img src="figure.sin4t_out_i.svg"
 alt="大部分都是 0, 但是两个尖尖着实吸引眼球：(0.04, -50)，(0.96, 50)" />
 <figcaption aria-hidden="true">大部分都是 0,
 但是两个尖尖着实吸引眼球：<code>(0.04, -50)</code>，<code>(0.96, 50)</code></figcaption>
@@ -110,13 +110,11 @@ alt="大部分都是 0, 但是两个尖尖着实吸引眼球：(0.04, -50)，(0.
 的输出只有左边半部分有实际参考意义，右边是重复多余的。</p>
 <p>最后是逆变换的结果：</p>
 <figure>
-<img src="/image/figure/series/fft_sin4t-back-r.svg"
-alt="居然和原始输入一模一样！" />
+<img src="figure.sin4t_back_r.svg" alt="居然和原始输入一模一样！" />
 <figcaption aria-hidden="true">居然和原始输入一模一样！</figcaption>
 </figure>
 <figure>
-<img src="/image/figure/series/fft_sin4t-back-i.svg"
-alt="也几乎都是 0" />
+<img src="figure.sin4t_back_i.svg" alt="也几乎都是 0" />
 <figcaption aria-hidden="true">也几乎都是 0</figcaption>
 </figure>
 <p>逆变换的结果居然和输入一模一样（误差非常小，可以忽略）。</p>
@@ -127,14 +125,14 @@ alt="也几乎都是 0" />
 对比修改之前的结果。</p>
 <p>频率设为 3：</p>
 <figure>
-<img src="/image/figure/series/fft_sin3t-out-i.svg"
+<img src="figure.sin3t_out_i.svg"
 alt="基本未变化，只有尖尖的位置：(0.03, -50)" />
 <figcaption
 aria-hidden="true">基本未变化，只有尖尖的位置：<code>(0.03, -50)</code></figcaption>
 </figure>
 <p>频率设为 5：</p>
 <figure>
-<img src="/image/figure/series/fft_sin5t-out-i.svg"
+<img src="figure.sin5t_out_i.svg"
 alt="基本也未变化，只有尖尖的位置：(0.05, -50)" />
 <figcaption
 aria-hidden="true">基本也未变化，只有尖尖的位置：<code>(0.05, -50)</code></figcaption>
@@ -146,12 +144,12 @@ aria-hidden="true">基本也未变化，只有尖尖的位置：<code>(0.05, -50
 意味着输入函数输出的是一个常数，一个不会变化的数。</p>
 <p>再次修改输入函数，让他始终输出 1：</p>
 <figure>
-<img src="/image/figure/series/fft_1-out-i.svg" alt="虚数部分" />
+<img src="figure.1_out_i.svg" alt="虚数部分" />
 <figcaption aria-hidden="true">虚数部分</figcaption>
 </figure>
 <p>奇怪的是，第一个位置并没有出现尖尖。相反，这次实数部分出现了：</p>
 <figure>
-<img src="/image/figure/series/fft_1-out-r.svg" alt="实数部分" />
+<img src="figure.1_out_r.svg" alt="实数部分" />
 <figcaption aria-hidden="true">实数部分</figcaption>
 </figure>
 <p>看来虚数部分不能反应出输入函数的常数特征，相反，实数部分能够得到反映。现在得补充一下之前的结论：频率为
@@ -160,14 +158,14 @@ aria-hidden="true">基本也未变化，只有尖尖的位置：<code>(0.05, -50
 <p>接下来，单独修改振幅对比结果。</p>
 <p>振幅设为 0.5：</p>
 <figure>
-<img src="/image/figure/series/fft_0.5sin4t-out-i.svg"
+<img src="figure.0.5sin4t_out_i.svg"
 alt="基本未变化，只有尖尖的高度：(0.04, -25)" />
 <figcaption
 aria-hidden="true">基本未变化，只有尖尖的高度：<code>(0.04, -25)</code></figcaption>
 </figure>
 <p>振幅设为 2：</p>
 <figure>
-<img src="/image/figure/series/fft_2sin4t-out-i.svg"
+<img src="figure.2sin4t_out_i.svg"
 alt="基本未变化，只有尖尖的高度：(0.04, -100)" />
 <figcaption
 aria-hidden="true">基本未变化，只有尖尖的高度：<code>(0.04, -100)</code></figcaption>
@@ -179,14 +177,14 @@ aria-hidden="true">基本未变化，只有尖尖的高度：<code>(0.04, -100)<
 <p>还是使用最初的那个输入函数，不做如何修改。因为这次样本数量非常多，所以图表里只记录了前一部分。</p>
 <p>采样 200 次：</p>
 <figure>
-<img src="/image/figure/series/fft_200-sin4t-out-i.svg"
+<img src="figure.200sin4t_out_i.svg"
 alt="基本未变化，只有尖尖的高度：(0.04, -100)" />
 <figcaption
 aria-hidden="true">基本未变化，只有尖尖的高度：<code>(0.04, -100)</code></figcaption>
 </figure>
 <p>采样 400 次：</p>
 <figure>
-<img src="/image/figure/series/fft_400-sin4t-out-i.svg"
+<img src="figure.400sin4t_out_i.svg"
 alt="基本未变化，只有尖尖的高度：(0.04, -200)" />
 <figcaption
 aria-hidden="true">基本未变化，只有尖尖的高度：<code>(0.04, -200)</code></figcaption>
@@ -199,8 +197,8 @@ aria-hidden="true">基本未变化，只有尖尖的高度：<code>(0.04, -200)<
 <div class="note">
 <p>还是拿最开始的那个输入函数来看，但 <code>t = 0</code> 时，弧度即为 0,
 那如果弧度不是 0 呢？简单的，可以给他加上一个常量：</p>
-<p><img src="/image/math/series/fft_phase-pi2.svg"
-title="f(t)=sin(4t \times 2\pi + pi/2)" class="math" /></p>
+<p><img src="math.sin4t+0.5pi.svg"
+title="f(t)=sin(4t \times 2\pi + \pi/2)" class="math" /></p>
 <p>这样，时间为 0 时，弧度从
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>i</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">pi/2</annotation></semantics></math>
 开始。所以说，起始弧度就是「相位」。</p>
