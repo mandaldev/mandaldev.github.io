@@ -6,6 +6,7 @@
 <link rel="shortcut icon" href="/image/avator.png">
 <link rel="stylesheet" type="text/css" href="/css/hl.css">
 <link rel="stylesheet" type="text/css" href="/css/main.css">
+<script src="/js/mathjax/tex-mml-chtml.js" id="MathJax-script" async></script>
 <script src="/js/defer.js" defer></script>
 </head>
 <body>
@@ -25,12 +26,10 @@
 </div>
 <h1 id="傅立叶变换">傅立叶变换</h1>
 <p>傅立叶变换（FT）的标准形式是积分，不过实际应用中，数据都是离散的，所以这里只研究他的离散形式：</p>
-<p><img src="math.dft.svg"
-title="X_k = \sum_{n=0}^{N-1} x_n\cdot e^{-i2\pi kn/N }"
-class="math" /></p>
-<p><img src="math.dft_reverse.svg"
-title="x_n = \frac{1}{N} \sum_{k=0}^{N-1} X_k\cdot e^{i2\pi kn/N}"
-class="math" /></p>
+<p><span class="math display">\[X_k = \sum_{n=0}^{N-1} x_n\cdot
+e^{-i2\pi kn/N }\]</span></p>
+<p><span class="math display">\[x_n = \frac{1}{N} \sum_{k=0}^{N-1}
+X_k\cdot e^{i2\pi kn/N}\]</span></p>
 <p>离散傅立叶变换（DFT）的第一个公式的输入是时间维度的量，第二个是第一个的逆变换。</p>
 <p>数学公式总是令人苦恼，更别说如此复杂的。</p>
 <p>不过不要紧，理解傅立叶变换并不意味着一定要理解他的公式，从实际的事例去理解他反而更加直观。所以我们直接用他去处理数据，获取输出，通过各种直观的数据可视化方式去理解傅立叶变换到底干了什么。</p>
@@ -70,8 +69,7 @@ FFTW 的 <code>plan</code>，可以把这个 <code>plan</code>
 <p>接下来，得构造数据来进行实验。很简单，我们可以使用一个简单的单个参数的函数来填充傅立叶变换的输入的实数部分，因为实际中一般不会使用复数,
 现在我们也不关心他，所以输入数据的虚数部分都是 0。</p>
 <p>第一次使用的是一个正弦函数：</p>
-<p><img src="math.sin4t.svg" title="f(t)=sin(4t \times 2\pi)"
-class="math" /></p>
+<p><span class="math display">\[f(t)=sin(4t \times 2\pi)\]</span></p>
 <p>这个函数的输入是时间，我们以 1/100 秒的间隔，从 0.0
 秒开始，调用这个函数 100 次，得到 100 个数据。</p>
 <div class="note">
@@ -189,7 +187,8 @@ alt="基本未变化，只有尖尖的高度：(0.04, -200)" />
 <figcaption
 aria-hidden="true">基本未变化，只有尖尖的高度：<code>(0.04, -200)</code></figcaption>
 </figure>
-<p>所以可以下结论：虚数部分的尖尖的高度与对应频率信号的振幅的关系即：<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>振</mi><mi>幅</mi><mo>×</mo><mi>采</mi><mi>样</mi><mi>次</mi><mi>数</mi><mi>的</mi><mi>一</mi><mi>半</mi><mo>=</mo><mi>高</mi><mi>度</mi></mrow><annotation encoding="application/x-tex">振幅 \times 采样次数的一半 = 高度</annotation></semantics></math></p>
+<p>所以可以下结论：虚数部分的尖尖的高度与对应频率信号的振幅的关系即：<span
+class="math inline">\(振幅 \times 采样次数的一半 = 高度\)</span></p>
 <h2 id="结论">结论</h2>
 <p>有了上面所有的实验结果，可以发现，DFT
 可以提取一个信号的频率、振幅信息，而且每个位置对应一个频率，绝对值对应该频率的正弦曲线的振幅。</p>
@@ -197,10 +196,9 @@ aria-hidden="true">基本未变化，只有尖尖的高度：<code>(0.04, -200)<
 <div class="note">
 <p>还是拿最开始的那个输入函数来看，但 <code>t = 0</code> 时，弧度即为 0,
 那如果弧度不是 0 呢？简单的，可以给他加上一个常量：</p>
-<p><img src="math.sin4t+0.5pi.svg"
-title="f(t)=sin(4t \times 2\pi + \pi/2)" class="math" /></p>
-<p>这样，时间为 0 时，弧度从
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>i</mi><mi>/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">pi/2</annotation></semantics></math>
+<p><span class="math display">\[f(t)=sin(4t \times 2\pi +
+\pi/2)\]</span></p>
+<p>这样，时间为 0 时，弧度从 <span class="math inline">\(\pi/2\)</span>
 开始。所以说，起始弧度就是「相位」。</p>
 </div>
 <p>现在我们知道 DFT
