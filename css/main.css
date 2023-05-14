@@ -196,6 +196,14 @@ div.warning {
     background-color: #fff5f4;
 }
 
+div.mark {
+    margin: 1rem 0;
+    padding: 0rem 1rem;
+    border: 4px solid #d0cd9b;
+    border-radius: 8px;
+    background-color: #fffff4;
+}
+
 img.math {
     display: block;
     width: 45%;
