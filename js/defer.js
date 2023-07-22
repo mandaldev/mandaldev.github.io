@@ -19,3 +19,8 @@ for (let figcap of figcaps) {
 	let imgsrc = figure.getElementsByTagName('img')[0].src
 	figcap.innerHTML = `${figcap.innerHTML} <a href="${imgsrc}" target=blank title="新标签页查看大图" class="new-tab-sym-link">↗</a>`
 }
+
+var tables = document.getElementsByTagName('table')
+for (let table of tables) {
+	table.outerHTML = `<div class="table-wrapper">${table.outerHTML}</div>`
+}

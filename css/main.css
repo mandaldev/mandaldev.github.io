@@ -239,3 +239,7 @@ figcaption {
     width: 8rem;
     vertical-align: bottom;
 }
+
+div.table-wrapper {
+    overflow-x: scroll;
+}
