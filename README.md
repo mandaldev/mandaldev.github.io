@@ -1,3 +1,3 @@
 # mandaldev.github.io
 
-public pages of Mandal Dev.
+Mandal Dev 在网络上的个人主页。 Mandal Dev's home page on the internet.
