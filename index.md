@@ -9,7 +9,7 @@ permalink: /
 
 一个以 C++ 为主力的程序员，来自中国。
 
-| 项目 | 个人口味 |
+| 个人口味 | |
 | - | - |
 | OS | Ubuntu LTS |
 | Editor | VSCode |
